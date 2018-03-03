@@ -112,19 +112,9 @@ switch opts.prenet
         
         % loading weights for sum_w layer
         if strcmp('1res',nettype)
-            netpath = fullfile('./models','siam_1resnet_epoch10.mat');
-            net_ = load_pretrained(netpath, []);
-            net_conv.params(net_conv.getParamIndex('sumweights')).value =...
-                net_.params(net_.getParamIndex('sumweights')).value;
-            if opts.fusiontransform
-                % add weight map to xcorr layers
-                xcorrid = net_conv.getLayerIndex('xcorr');
-                net_conv.layers(xcorrid).block.weight = ...
-                    net_.params(net_.getParamIndex('sumweights')).value;
-                xcorrid = net_conv.getLayerIndex('xcorr1');
-                net_conv.layers(xcorrid).block.weight = ...
-                    1-net_.params(net_.getParamIndex('sumweights')).value;
-            end
+            swpath = fullfile('./models','sumw.mat');
+            load(swpath);
+            net_conv.params(net_conv.getParamIndex('sumweights')).value =sumw;
         end
         
         % siamese network params
