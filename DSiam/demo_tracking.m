@@ -1,7 +1,6 @@
 %% DEMO_TRACKING
 
-
-rootdir = '/home/fan/Desktop/Object_Tracking/Demo/DSiamE/';
+rootdir = '..../DSiam/';
 seq = struct('name','skiing','path',[rootdir,'sequences/Skiing/'],'startFrame',1,'endFrame',81,'nz',4,'ext','jpg','init_rect', [0,0,0,0]);
 
 seq.len = seq.endFrame - seq.startFrame + 1;
@@ -21,5 +20,5 @@ isDisplay = 1;
 netname = 'siamfc';
 % '1res' denotes the multi-layer DSiam (DSiamM in paper) and uses two layers for tracking
 % '0res' denotes the single-layer DSiam (DSiam in paper) and uses the last layer for tracking
-nettype = '1res';
+nettype = '0res';
 run_DSiam(seq,[],isDisplay,rootdir,netname,nettype);
